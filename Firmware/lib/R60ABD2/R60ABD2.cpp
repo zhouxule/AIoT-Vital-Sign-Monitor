@@ -343,6 +343,17 @@ void Task_Radar(void *pvParameters) {
 
     Serial.println("[Task_Radar] FreeRTOS Task running on Core 0");
 
+    // Wait 800ms for radar power-on stabilization
+    vTaskDelay(pdMS_TO_TICKS(800));
+
+    // Auto-enable 5Hz Doppler Waveforms:
+    // As per R60ABD2 User Manual V3.5, waveform reporting is DISABLED by default!
+    uint8_t enable_val = 0x01;
+    R60ABD2_SendCommand(0x85, 0x0A, &enable_val, 1); // Enable DP7 Heart Rate Waveform
+    vTaskDelay(pdMS_TO_TICKS(100));
+    R60ABD2_SendCommand(0x81, 0x0C, &enable_val, 1); // Enable DP10 Respiratory Waveform
+    Serial.println("[R60ABD2] Sent auto-enable commands for 5Hz HR & RR Doppler waveforms (DP7 & DP10).");
+
     uint32_t last_diagnostic_check = millis();
 
     while (1) {

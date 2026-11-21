@@ -253,7 +253,7 @@ export function HistoryPage({ liveReadings }: HistoryPageProps) {
               domainMax={39}
             />
             <ChartCard
-              title="Body Movement Intensity (DP4 体动)"
+              title="Body Movement Intensity (DP4 Radar)"
               dataKey="body_movement"
               data={readings}
               color="#f59e0b"
@@ -262,7 +262,7 @@ export function HistoryPage({ liveReadings }: HistoryPageProps) {
               domainMax={100}
             />
             <ChartCard
-              title="Target Distance (DP3 雷达测距)"
+              title="Target Distance (DP3 Radar)"
               dataKey="distance_cm"
               data={readings}
               color="#6366f1"
